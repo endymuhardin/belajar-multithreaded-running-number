@@ -24,26 +24,26 @@ public class RunningNumber implements Serializable {
     @Id @GeneratedValue
     private Long id;
 
-    @Column(name="running_date", unique = true) @Temporal(TemporalType.DATE)
-    private Date currentDate;
+    @Column(name="tanggal_kerja", unique = true) @Temporal(TemporalType.DATE)
+    private Date tanggalKerja;
 
-    @Column(name="current_number")
-    private Long currentNumber = 1L;
+    @Column(name="nomer_terbaru")
+    private Long nomerTerbaru = 0L;
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public Date getTanggalKerja() {
+        return tanggalKerja;
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setTanggalKerja(Date tanggalKerja) {
+        this.tanggalKerja = tanggalKerja;
     }
 
-    public Long getCurrentNumber() {
-        return currentNumber;
+    public Long getNomerTerbaru() {
+        return nomerTerbaru;
     }
 
-    public void setCurrentNumber(Long currentNumber) {
-        this.currentNumber = currentNumber;
+    public void setNomerTerbaru(Long nomerTerbaru) {
+        this.nomerTerbaru = nomerTerbaru;
     }
 
     public Long getId() {

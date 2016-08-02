@@ -14,22 +14,22 @@ public class RunningNumberService {
     
     @Autowired private RunningNumberDao dao;
     
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     
     @Transactional
     public RunningNumber generate(Date tanggalKerja){
-        RunningNumber terbaru = dao.findByCurrentDate(tanggalKerja);
-        if(terbaru == null){
-            terbaru = new RunningNumber();
-            terbaru.setCurrentDate(tanggalKerja);
-            terbaru.setCurrentNumber(0L);
+        RunningNumber rn = dao.findByTanggalKerja(tanggalKerja);
+        if(rn == null){
+            rn = new RunningNumber();
+            rn.setTanggalKerja(tanggalKerja);
+            rn.setNomerTerbaru(0L);
         }
         
-        logger.info("Angka lama : {}", terbaru.getCurrentNumber());
-        terbaru.setCurrentNumber(terbaru.getCurrentNumber() + 1);
-        dao.save(terbaru);
-        logger.info("Angka baru : {}",terbaru.getCurrentNumber());
+        logger.info("Angka lama : {}", rn.getNomerTerbaru());
+        rn.setNomerTerbaru(rn.getNomerTerbaru() + 1);
+        dao.save(rn);
+        logger.info("Angka baru : {}",rn.getNomerTerbaru());
         
-        return terbaru;
+        return rn;
     }
 }

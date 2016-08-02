@@ -8,5 +8,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface RunningNumberDao extends PagingAndSortingRepository<RunningNumber, Long>{
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    public RunningNumber findByCurrentDate(Date tanggalKerja);
+    public RunningNumber findByTanggalKerja(Date tanggalKerja);
 }

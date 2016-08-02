@@ -12,7 +12,7 @@ public class RunningNumberController {
     
     @Autowired private RunningNumberService service;
     
-    @RequestMapping("/gen")
+    @RequestMapping("/generate")
     public RunningNumber generate(){
         return service.generate(new Date());
     }

@@ -30,13 +30,13 @@ public class RunningNumberServiceTest {
     
     @Autowired private RunningNumberService service;
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     
     @Test
     public void testGenerateSimple() {
         RunningNumber num = service.generate(new Date());
         assertNotNull(num);
-        Long angka = num.getCurrentNumber();
+        Long angka = num.getNomerTerbaru();
         logger.info("Angka terakhir = {}",angka);
     }
     
@@ -125,8 +125,8 @@ public class RunningNumberServiceTest {
             for (int j = 0; j < numLoops; j++) {
                 try {
                     RunningNumber num = rns.generate(new Date());
-                    System.out.println("Thread " + threadNo + " : Current Number : " + num.getCurrentNumber());
-                    generatedNumbers.add(num.getCurrentNumber());
+                    System.out.println("Thread " + threadNo + " : Current Number : " + num.getNomerTerbaru());
+                    generatedNumbers.add(num.getNomerTerbaru());
                 } catch(CannotAcquireLockException err) {
                     System.out.println("Thread " + threadNo +" berebut lock, no problem, lanjut saja");
                 } catch (LockAcquisitionException err){
