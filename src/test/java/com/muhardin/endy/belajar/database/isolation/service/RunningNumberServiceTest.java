@@ -34,7 +34,7 @@ public class RunningNumberServiceTest {
     
     @Test
     public void testGenerateSimple() {
-        RunningNumber num = service.generate(new Date());
+        RunningNumber num = service.generate("surat-keluar", new Date());
         assertNotNull(num);
         Long angka = num.getNomerTerbaru();
         logger.info("Angka terakhir = {}",angka);
@@ -124,7 +124,7 @@ public class RunningNumberServiceTest {
         public void run() {
             for (int j = 0; j < numLoops; j++) {
                 try {
-                    RunningNumber num = rns.generate(new Date());
+                    RunningNumber num = rns.generate("test-multithread", new Date());
                     System.out.println("Thread " + threadNo + " : Current Number : " + num.getNomerTerbaru());
                     generatedNumbers.add(num.getNomerTerbaru());
                 } catch(CannotAcquireLockException err) {

@@ -17,10 +17,11 @@ public class RunningNumberService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     @Transactional
-    public RunningNumber generate(Date tanggalKerja){
-        RunningNumber rn = dao.findByTanggalKerja(tanggalKerja);
+    public RunningNumber generate(String kegunaan, Date tanggalKerja){
+        RunningNumber rn = dao.findByKegunaanAndTanggalKerja(kegunaan, tanggalKerja);
         if(rn == null){
             rn = new RunningNumber();
+            rn.setKegunaan(kegunaan);
             rn.setTanggalKerja(tanggalKerja);
             rn.setNomerTerbaru(0L);
         }
