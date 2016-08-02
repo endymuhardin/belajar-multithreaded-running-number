@@ -6,6 +6,7 @@
 package com.muhardin.endy.belajar.database.isolation.service;
 
 import com.muhardin.endy.belajar.database.isolation.entity.RunningNumber;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -28,13 +29,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RunningNumberServiceTest {
     
+    private static final SimpleDateFormat resetBulanan = new SimpleDateFormat("yyyy-MM");
+    
     @Autowired private RunningNumberService service;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     @Test
-    public void testGenerateSimple() {
-        RunningNumber num = service.generate("surat-keluar", new Date());
+    public void testGenerateSimple() {        
+        RunningNumber num = service.generate("surat-keluar", resetBulanan.format(new Date()));
         assertNotNull(num);
         Long angka = num.getNomerTerbaru();
         logger.info("Angka terakhir = {}",angka);
@@ -124,7 +127,7 @@ public class RunningNumberServiceTest {
         public void run() {
             for (int j = 0; j < numLoops; j++) {
                 try {
-                    RunningNumber num = rns.generate("test-multithread", new Date());
+                    RunningNumber num = rns.generate("test-multithread", resetBulanan.format(new Date()));
                     System.out.println("Thread " + threadNo + " : Current Number : " + num.getNomerTerbaru());
                     generatedNumbers.add(num.getNomerTerbaru());
                 } catch(CannotAcquireLockException err) {

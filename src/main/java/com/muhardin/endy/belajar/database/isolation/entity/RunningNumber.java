@@ -6,14 +6,11 @@
 package com.muhardin.endy.belajar.database.isolation.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -27,15 +24,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(
         name="running_number", 
         uniqueConstraints = 
-                @UniqueConstraint(columnNames = {"tanggal_kerja", "kegunaan"})
+                @UniqueConstraint(columnNames = {"reset_keyword", "kegunaan"})
 )
 public class RunningNumber implements Serializable {
     @Id @GeneratedValue
     private Long id;
 
     @NotNull
-    @Column(name="tanggal_kerja", nullable = false) @Temporal(TemporalType.DATE)
-    private Date tanggalKerja;
+    @Column(name="reset_keyword", nullable = false)
+    private String resetKeyword;
 
     @NotNull @Min(1)
     @Column(name="nomer_terbaru", nullable = false)
@@ -45,12 +42,12 @@ public class RunningNumber implements Serializable {
     @Column(nullable = false)
     private String kegunaan;
 
-    public Date getTanggalKerja() {
-        return tanggalKerja;
+    public String getResetKeyword() {
+        return resetKeyword;
     }
 
-    public void setTanggalKerja(Date tanggalKerja) {
-        this.tanggalKerja = tanggalKerja;
+    public void setResetKeyword(String resetKeyword) {
+        this.resetKeyword = resetKeyword;
     }
 
     public String getKegunaan() {

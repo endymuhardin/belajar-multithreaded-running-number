@@ -2,7 +2,6 @@ package com.muhardin.endy.belajar.database.isolation.service;
 
 import com.muhardin.endy.belajar.database.isolation.dao.RunningNumberDao;
 import com.muhardin.endy.belajar.database.isolation.entity.RunningNumber;
-import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,12 @@ public class RunningNumberService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     @Transactional
-    public RunningNumber generate(String kegunaan, Date tanggalKerja){
-        RunningNumber rn = dao.findByKegunaanAndTanggalKerja(kegunaan, tanggalKerja);
+    public RunningNumber generate(String kegunaan, String resetKeyword){
+        RunningNumber rn = dao.findByKegunaanAndResetKeyword(kegunaan, resetKeyword);
         if(rn == null){
             rn = new RunningNumber();
             rn.setKegunaan(kegunaan);
-            rn.setTanggalKerja(tanggalKerja);
+            rn.setResetKeyword(resetKeyword);
             rn.setNomerTerbaru(0L);
         }
         
